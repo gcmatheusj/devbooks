@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { googleBooksApi } from '../../services/googleBooksApi'
 
-import { Container, Content, LoadingContainer } from './Book.style'
+import { BackButton, Container, Content, LoadingContainer } from './Book.style'
 
 import { Spinner } from '../../components/Spinner'
 import { Thumbnail } from '../../components/Thumbnail'
+
+import { ReactComponent as ArrowLeftIcon } from '../../icons/arrow-left.svg'
 
 export interface BookState {
   id: string
@@ -23,6 +25,7 @@ export interface BookState {
 
 export function Book() {
   const [book, setBook] = useState<BookState | null>(null)
+  const navigate = useNavigate()
 
   const params = useParams()
   const { bookId } = params
@@ -33,8 +36,15 @@ export function Book() {
       .then((response) => setBook(response.data))
   }, [bookId])
 
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+
   return (
     <Container>
+      <BackButton onClick={handleGoBack}>
+        <ArrowLeftIcon />
+      </BackButton>
       {book ? (
         <>
           <Thumbnail

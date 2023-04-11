@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { BookState as Book } from '../Book'
 
@@ -19,14 +19,23 @@ interface BooksState {
 export function Books() {
   const [books, setBooks] = useState<BooksState | null>(null)
   const params = useSearchParams()
+  const navigate = useNavigate()
 
   const [searchParams] = params
   const q = searchParams.get('q')
 
   useEffect(() => {
-    googleBooksApi
-      .get(`/v1/volumes?q=${q}&maxResults=20`)
-      .then((response) => setBooks(response.data))
+    if (!q) {
+      navigate('/')
+    }
+  }, [q, navigate])
+
+  useEffect(() => {
+    if (q) {
+      googleBooksApi
+        .get(`/v1/volumes?q=${q}&maxResults=20`)
+        .then((response) => setBooks(response.data))
+    }
   }, [q])
 
   return (

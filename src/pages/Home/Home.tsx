@@ -1,10 +1,19 @@
 import { useState } from 'react'
-import { SearchContainer, Link, Container } from './Home.styles'
+import { useNavigate } from 'react-router-dom'
+
+import { SearchContainer, Container, SearchButton } from './Home.styles'
 
 import { SearchBox } from '../../components/SearchBox'
 
 export function Home() {
   const [search, setSearch] = useState('')
+  const navigate = useNavigate()
+
+  const handleSearch = () => {
+    if (search) {
+      navigate(`/books?q=${search}`)
+    }
+  }
 
   return (
     <Container>
@@ -17,7 +26,7 @@ export function Home() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <Link to={`/books?q=${search}`}>Buscar</Link>
+        <SearchButton onClick={handleSearch}>Buscar</SearchButton>
       </SearchContainer>
     </Container>
   )

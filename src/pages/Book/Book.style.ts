@@ -7,6 +7,18 @@ export const Container = styled.div`
   background-color: #fff;
 `
 
+export const BackButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  height: 46px;
+  width: 46px;
+  cursor: pointer;
+  position: fixed;
+  left: 20px;
+  top: 20px;
+`
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;

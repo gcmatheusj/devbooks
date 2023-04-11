@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Link as L } from 'react-router-dom'
 
 export const Container = styled.div`
   display: flex;
@@ -7,6 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 100vh;
+  padding: 20px;
 
   h1 {
     margin-bottom: 24px;
@@ -17,11 +17,13 @@ export const Container = styled.div`
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
 `
 
-export const Link = styled(L)`
-  padding: 14px 12px;
+export const SearchButton = styled.button`
+  padding: 0 12px;
+  height: 48px;
   border-radius: 32px;
   background-color: #ef552b;
   color: #fff;
@@ -30,4 +32,11 @@ export const Link = styled(L)`
   font-size: 14px;
   text-decoration: none;
   margin-left: 8px;
+  cursor: pointer;
+  border: 0;
+  transition: 0.5s all;
+
+  &:hover {
+    filter: brightness(90%);
+  }
 `

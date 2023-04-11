@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0 20px;
 
   h1 {
     margin: 24px 0;
@@ -12,17 +13,15 @@ export const Container = styled.div`
   }
 
   ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    max-width: 1200px;
+    width: 100%;
+    grid-gap: 16px;
     list-style: none;
-    gap: 16px;
-    margin: 0 20px;
   }
 
   li {
-    width: 300px;
-
     &:hover {
       div {
         background-color: #ef552b;
@@ -32,22 +31,6 @@ export const Container = styled.div`
     a {
       text-decoration: none;
     }
-  }
-`
-
-export const Cape = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-  width: 300px;
-  background-color: #d9d9d9;
-  border-radius: 4px;
-  transition: all 0.5s;
-
-  svg {
-    width: 120px;
-    color: #fff;
   }
 `
 

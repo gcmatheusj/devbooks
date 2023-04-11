@@ -7,25 +7,10 @@ export const Container = styled.div`
   background-color: #fff;
 `
 
-export const Cape = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 50%;
-  background-color: #ef552b;
-  transition: all 0.5s;
-
-  svg {
-    width: 300px;
-    color: #fff;
-  }
-`
-
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   width: 50%;
   padding: 48px;
   overflow-y: scroll;

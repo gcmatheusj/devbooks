@@ -9,8 +9,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #root, body {
-    height: 100vh;
-    width: 100vw;
     font: 16px Montserrat, sans-serif;
   }
 `

@@ -22,11 +22,7 @@ export function Thumbnail({
 }: ThumbnailProps) {
   return (
     <Container size={size} bgColor={bgColor}>
-      {thumbnail ? (
-        <img src={thumbnail} alt={title} width={imgWidth[size]} />
-      ) : (
-        <NoImgIcon />
-      )}
+      {thumbnail ? <img src={thumbnail} alt={title} /> : <NoImgIcon />}
     </Container>
   )
 }

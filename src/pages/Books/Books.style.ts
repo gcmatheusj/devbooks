@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 0 20px 40px;
 
   h1 {
     margin: 24px 0;
@@ -32,6 +32,12 @@ export const Container = styled.div`
       text-decoration: none;
     }
   }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 24px;
+    }
+  }
 `
 
 export const Title = styled.h2`
@@ -46,6 +52,10 @@ export const Title = styled.h2`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `
 
 export const Subtitle = styled.h3`
@@ -59,4 +69,8 @@ export const Subtitle = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `

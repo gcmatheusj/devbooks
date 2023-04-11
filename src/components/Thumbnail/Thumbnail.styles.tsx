@@ -24,6 +24,28 @@ const containerCustomStyles = {
       width: 300px;
       color: #fff;
     }
+
+    @media (max-width: 768px) {
+      height: 400px;
+      width: 100%;
+
+      svg {
+        width: 120px;
+      }
+    }
+  `
+}
+
+const imageCustomStyles = {
+  small: () => css`
+    width: 120px;
+  `,
+  large: () => css`
+    width: 50%;
+
+    @media (max-width: 768px) {
+      width: 180px;
+    }
   `
 }
 
@@ -35,4 +57,8 @@ export const Container = styled.div<ContainerProps>`
   transition: all 0.5s;
 
   ${({ size }) => containerCustomStyles[size]}
+
+  img {
+    ${({ size }) => imageCustomStyles[size]}
+  }
 `

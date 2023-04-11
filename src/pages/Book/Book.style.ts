@@ -5,6 +5,10 @@ export const Container = styled.div`
   height: 100%;
   width: 100%;
   background-color: #fff;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 export const BackButton = styled.button`
@@ -17,6 +21,18 @@ export const BackButton = styled.button`
   position: fixed;
   left: 20px;
   top: 20px;
+
+  @media (max-width: 1024px) {
+    height: 32px;
+    width: 32px;
+    left: 12px;
+  }
+
+  @media (max-width: 768px) {
+    height: 28px;
+    width: 28px;
+    left: 8px;
+  }
 `
 
 export const Content = styled.div`
@@ -29,6 +45,7 @@ export const Content = styled.div`
 
   h2 {
     font-size: 54px;
+    margin-bottom: 16px;
   }
 
   h3 {
@@ -44,6 +61,26 @@ export const Content = styled.div`
   p {
     font-size: 18px;
     margin-bottom: 16px;
+  }
+
+  @media (max-width: 768px) {
+    overflow-y: inherit;
+    width: 100%;
+  }
+
+  @media (max-width: 768px), (max-width: 1024px) {
+    h2 {
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+    }
   }
 `
 

@@ -7,7 +7,7 @@ import {
   useSearchParams
 } from 'react-router-dom'
 
-import { BookState as Book } from '../Book'
+import { BookState as Book } from '../BookDetail'
 
 import { Container, Subtitle, Title } from './Books.style'
 

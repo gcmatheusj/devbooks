@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { GlobalStyles } from './styles/global'
 
-import { Home } from './pages/Home'
+import { Home } from './pages/Search'
 import { Books } from './pages/Books'
-import { Book } from './pages/Book'
+import { Book } from './pages/BookDetail'
 
 function App() {
   return (

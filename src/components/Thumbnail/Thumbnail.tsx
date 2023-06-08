@@ -9,11 +9,6 @@ interface ThumbnailProps {
   bgColor: string
 }
 
-const imgWidth = {
-  small: '120px',
-  large: '300px'
-}
-
 export function Thumbnail({
   title,
   thumbnail,

@@ -42,11 +42,11 @@ export function Book() {
 
   return (
     <Container>
-      <BackButton onClick={handleGoBack}>
-        <ArrowLeftIcon />
-      </BackButton>
       {book ? (
         <>
+          <BackButton onClick={handleGoBack}>
+            <ArrowLeftIcon />
+          </BackButton>
           <Thumbnail
             thumbnail={book.volumeInfo.imageLinks?.thumbnail}
             title={book.volumeInfo.title}

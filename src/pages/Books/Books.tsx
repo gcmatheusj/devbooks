@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useSearchParams
+} from 'react-router-dom'
 
 import { BookState as Book } from '../Book'
 
@@ -19,16 +25,10 @@ interface BooksState {
 export function Books() {
   const [books, setBooks] = useState<BooksState | null>(null)
   const params = useSearchParams()
-  const navigate = useNavigate()
+  const location = useLocation()
 
   const [searchParams] = params
   const q = searchParams.get('q')
-
-  useEffect(() => {
-    if (!q) {
-      navigate('/')
-    }
-  }, [q, navigate])
 
   useEffect(() => {
     if (q) {
@@ -37,6 +37,10 @@ export function Books() {
         .then((response) => setBooks(response.data))
     }
   }, [q])
+
+  if (!q) {
+    return <Navigate to="/" state={{ from: location }} replace />
+  }
 
   return (
     <Container>

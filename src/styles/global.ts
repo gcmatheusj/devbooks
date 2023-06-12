@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 // Template Literals
 export const GlobalStyles = createGlobalStyle`
@@ -8,7 +8,14 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  #root, body {
-    font: 16px Montserrat, sans-serif;
-  }
+  ${({ theme }) => css`
+    html {
+      font-size: 62.5%;
+    }
+
+    #root,
+    body {
+      font: 1.6rem ${theme.font.family};
+    }
+  `}
 `

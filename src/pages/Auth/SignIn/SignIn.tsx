@@ -1,10 +1,12 @@
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
 import { Link } from '../../../components/Link'
+import { Logo } from '../../../components/Logo/Logo'
 
 export function SignIn() {
   return (
     <div style={{ width: 600 }}>
+      <Logo />
       <h1>Faça seu login!</h1>
       <p>
         Não tem uma conta?{' '}

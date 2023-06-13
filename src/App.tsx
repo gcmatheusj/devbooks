@@ -4,9 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { GlobalStyles } from './styles/global'
 import { theme } from './styles/theme'
 
-import { Home } from './pages/Search'
-import { Books } from './pages/Books'
-import { Book } from './pages/BookDetail'
+import { SignIn } from './pages/Auth/SignIn'
 
 function App() {
   return (
@@ -14,9 +12,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/books" element={<Books />} />
-          <Route path="/books/:bookId" element={<Book />} />
+          <Route path="/" element={<SignIn />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

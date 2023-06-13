@@ -16,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     #root,
     body {
       font: 1.6rem ${theme.font.family};
+      color: ${theme.colors.blue};
     }
   `}
 `

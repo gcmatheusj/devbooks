@@ -1,10 +1,17 @@
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
+import { Link } from '../../../components/Link'
 
 export function SignIn() {
   return (
     <div style={{ width: 600 }}>
       <h1>Faça seu login!</h1>
+      <p>
+        Não tem uma conta?{' '}
+        <Link color="secondary" to="/">
+          Cadastre-se
+        </Link>
+      </p>
       <Input
         id="email"
         label="Email"

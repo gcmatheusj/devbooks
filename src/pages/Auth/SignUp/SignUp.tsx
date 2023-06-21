@@ -1,3 +1,5 @@
+import { SubmitHandler, useForm } from 'react-hook-form'
+
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
 import { Link } from '../../../components/Link'
@@ -11,7 +13,19 @@ import {
   InputContainer
 } from '../Auth.styles'
 
+interface SignUpForm {
+  name: string
+  email: string
+  password: string
+}
+
 export function SignUp() {
+  const { register, handleSubmit } = useForm<SignUpForm>()
+
+  const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
+    console.log(data)
+  }
+
   return (
     <Container>
       <FormContainer>
@@ -29,19 +43,36 @@ export function SignUp() {
           </p>
         </Heading>
 
-        <InputContainer>
-          <Input id="name" label="Nome Completo" type="text" />
-        </InputContainer>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputContainer>
+            <Input
+              id="name"
+              label="Nome Completo"
+              type="text"
+              {...register('name')}
+            />
+          </InputContainer>
 
-        <InputContainer>
-          <Input id="email" label="Email" type="email" />
-        </InputContainer>
+          <InputContainer>
+            <Input
+              id="email"
+              label="Email"
+              type="email"
+              {...register('email')}
+            />
+          </InputContainer>
 
-        <InputContainer>
-          <Input id="password" label="Senha" type="password" />
-        </InputContainer>
+          <InputContainer>
+            <Input
+              id="password"
+              label="Senha"
+              type="password"
+              {...register('password')}
+            />
+          </InputContainer>
 
-        <Button fullWidth>Entrar</Button>
+          <Button fullWidth>Entrar</Button>
+        </form>
       </FormContainer>
     </Container>
   )

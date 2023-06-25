@@ -1,6 +1,7 @@
 import { PropsWithChildren, createContext, useState } from 'react'
 import { DEV_BOOKS_SESSION_KEY } from '../../constants/storage'
 import { useSignIn } from '../../hooks/useSignIn'
+import { useSignUp } from '../../hooks/useSignUp'
 
 interface User {
   id: number
@@ -46,6 +47,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     return null
   })
   const signInMutation = useSignIn()
+  const signUpMutation = useSignUp()
 
   const signIn = async (user: SignInUser): Promise<void> => {
     await signInMutation.mutateAsync(user, {
@@ -58,7 +60,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }
 
   const signUp = async (user: SignUpUser): Promise<void> => {
-    console.log(user)
+    await signUpMutation.mutateAsync(user)
   }
 
   const signOut = async (): Promise<void> => {

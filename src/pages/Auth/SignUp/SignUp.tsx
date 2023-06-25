@@ -14,6 +14,7 @@ import {
   Heading,
   InputContainer
 } from '../Auth.styles'
+import { useAuth } from '../../../hooks/useAuth'
 
 const validationSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
@@ -36,9 +37,10 @@ export function SignUp() {
   } = useForm<SignUpForm>({
     resolver: zodResolver(validationSchema)
   })
+  const { signUp } = useAuth()
 
   const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
-    console.log(data)
+    await signUp(data)
   }
 
   return (
@@ -89,7 +91,7 @@ export function SignUp() {
             />
           </InputContainer>
 
-          <Button fullWidth>Entrar</Button>
+          <Button fullWidth>Cadastrar</Button>
         </form>
       </FormContainer>
     </Container>

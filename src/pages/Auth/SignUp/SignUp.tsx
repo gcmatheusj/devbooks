@@ -1,4 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
@@ -13,14 +15,27 @@ import {
   InputContainer
 } from '../Auth.styles'
 
-interface SignUpForm {
-  name: string
-  email: string
-  password: string
-}
+const validationSchema = z.object({
+  name: z.string().min(1, { message: 'Nome é obrigatório' }),
+  email: z
+    .string()
+    .min(1, { message: 'Email é obrigatório' })
+    .email({ message: 'Insira um email válido' }),
+  password: z
+    .string()
+    .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
+})
+
+type SignUpForm = z.infer<typeof validationSchema>
 
 export function SignUp() {
-  const { register, handleSubmit } = useForm<SignUpForm>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<SignUpForm>({
+    resolver: zodResolver(validationSchema)
+  })
 
   const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
     console.log(data)
@@ -49,6 +64,7 @@ export function SignUp() {
               id="name"
               label="Nome Completo"
               type="text"
+              error={errors.name?.message}
               {...register('name')}
             />
           </InputContainer>
@@ -58,6 +74,7 @@ export function SignUp() {
               id="email"
               label="Email"
               type="email"
+              error={errors.email?.message}
               {...register('email')}
             />
           </InputContainer>
@@ -67,6 +84,7 @@ export function SignUp() {
               id="password"
               label="Senha"
               type="password"
+              error={errors.password?.message}
               {...register('password')}
             />
           </InputContainer>

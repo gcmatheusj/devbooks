@@ -1,5 +1,6 @@
 import { PropsWithChildren, createContext, useState } from 'react'
 import { DEV_BOOKS_SESSION_KEY } from '../../constants/storage'
+import { useSignIn } from '../../hooks/useSignIn'
 
 interface User {
   id: number
@@ -44,9 +45,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     return null
   })
+  const signInMutation = useSignIn()
 
   const signIn = async (user: SignInUser): Promise<void> => {
-    console.log(user)
+    await signInMutation.mutateAsync(user, {
+      onSuccess: (session) => {
+        setSession(session)
+
+        localStorage.setItem(DEV_BOOKS_SESSION_KEY, JSON.stringify(session))
+      }
+    })
   }
 
   const signUp = async (user: SignUpUser): Promise<void> => {

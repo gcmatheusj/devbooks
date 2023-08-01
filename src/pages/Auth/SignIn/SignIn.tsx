@@ -15,6 +15,7 @@ import {
   InputContainer
 } from '../Auth.styles'
 import { useAuth } from '../../../hooks/useAuth'
+import { AlertBanner } from '../../../components/AlertBanner'
 
 const validationSchema = z.object({
   email: z
@@ -81,6 +82,8 @@ export function SignIn() {
           </InputContainer>
 
           <Button fullWidth>Entrar</Button>
+
+          <AlertBanner variant="error" message="Algo deu errado!" />
         </form>
       </FormContainer>
     </Container>

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { isAxiosError } from 'axios'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -16,6 +18,7 @@ import {
 } from '../Auth.styles'
 import { useAuth } from '../../../hooks/useAuth'
 import { AlertBanner } from '../../../components/AlertBanner'
+import { useError } from '../../../hooks/useError'
 
 const validationSchema = z.object({
   email: z
@@ -38,9 +41,16 @@ export function SignIn() {
     resolver: zodResolver(validationSchema)
   })
   const { signIn } = useAuth()
+  const { error, handleError, clearError } = useError()
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
-    await signIn(data)
+    try {
+      clearError()
+
+      await signIn(data)
+    } catch (error) {
+      handleError(error)
+    }
   }
 
   return (
@@ -83,7 +93,7 @@ export function SignIn() {
 
           <Button fullWidth>Entrar</Button>
 
-          <AlertBanner variant="error" message="Algo deu errado!" />
+          {error && <AlertBanner variant="error" message={error} />}
         </form>
       </FormContainer>
     </Container>

@@ -19,7 +19,7 @@ export function useError(): UseError {
       setError('Email e senha incorretos')
     } else {
       setError(
-        'Algo deu erro ao processar a sua requisição, tente novamente mais tarde!'
+        'Algo deu errado ao processar a sua requisição, tente novamente mais tarde!'
       )
     }
   }

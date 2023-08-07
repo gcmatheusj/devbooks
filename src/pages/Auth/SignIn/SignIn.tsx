@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import { isAxiosError } from 'axios'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -40,17 +39,27 @@ export function SignIn() {
   } = useForm<SignInForm>({
     resolver: zodResolver(validationSchema)
   })
-  const { signIn } = useAuth()
+  const { signIn, isAuthenticated } = useAuth()
   const { error, handleError, clearError } = useError()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const from = location.state?.from?.pathname || '/home'
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     try {
       clearError()
 
       await signIn(data)
+
+      navigate(from)
     } catch (error) {
       handleError(error)
     }
+  }
+
+  if (isAuthenticated) {
+    return <Navigate to="/home" />
   }
 
   return (

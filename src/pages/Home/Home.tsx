@@ -1,10 +1,9 @@
-import { Header } from '../../components/Header'
+import { MainLayout } from '../../layouts/MainLayout'
 
 export function Home() {
   return (
-    <>
-      <Header />
+    <MainLayout>
       <h1>Home Page</h1>
-    </>
+    </MainLayout>
   )
 }

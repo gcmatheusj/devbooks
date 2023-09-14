@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Logo } from '../Logo'
+import { SearchBox } from '../SearchBox'
 
 import {
   Avatar,
@@ -21,6 +22,8 @@ export function Header() {
             <Link to="/meus-livros">Meus Livros</Link>
             <Link to="/favoritos">Favoritos</Link>
           </nav>
+
+          <SearchBox />
         </NavContainer>
 
         <Avatar>

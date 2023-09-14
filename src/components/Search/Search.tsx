@@ -11,6 +11,7 @@ import {
 } from './Search.styles'
 import { api } from '../../services/api'
 import { Book, SearchResultBook } from '../SearchResultBook/SearchResultBook'
+import { SkeletonLoader } from '../SkeletonLoader'
 
 interface ResultState {
   items: Book[]
@@ -54,6 +55,8 @@ export function Search() {
       {showResult && (
         <SearchResult>
           <span>Resultado da Busca</span>
+
+          <SkeletonLoader width="200px" height="26px" />
 
           <SearchResultBookContainer>
             {result && !loading ? (

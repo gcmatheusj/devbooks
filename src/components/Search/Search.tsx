@@ -10,21 +10,10 @@ import {
   SeeAllContainer
 } from './Search.styles'
 import { api } from '../../services/api'
-
-interface BookItem {
-  id: string
-  volumeInfo: {
-    title: string
-    description: string
-    imageLinks?: {
-      thumbnail: string
-    }
-    authors: string[]
-  }
-}
+import { Book, SearchResultBook } from '../SearchResultBook/SearchResultBook'
 
 interface ResultState {
-  items: BookItem[]
+  items: Book[]
 }
 
 export function Search() {
@@ -69,7 +58,7 @@ export function Search() {
           <SearchResultBookContainer>
             {result && !loading ? (
               result.items.map((item) => (
-                <span key={item.id}>{item.volumeInfo.title}</span>
+                <SearchResultBook key={item.id} book={item} />
               ))
             ) : (
               <span>Carregando...</span>

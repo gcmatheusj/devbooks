@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from 'react'
+import { KeyboardEvent, useRef, useState } from 'react'
 
 import { Link } from '../Link'
 import { SearchBox } from '../SearchBox'
@@ -11,8 +11,8 @@ import {
 } from './Search.styles'
 import { api } from '../../services/api'
 import { Book, SearchResultBook } from '../SearchResultBook/SearchResultBook'
-import { SkeletonLoader } from '../SkeletonLoader'
 import { SearchLoader } from './SearchLoader'
+import { useOutsideInteraction } from '../../hooks/useOutsideInteraction'
 
 interface ResultState {
   items: Book[]
@@ -23,6 +23,13 @@ export function Search() {
   const [result, setResult] = useState<ResultState | null>(null)
   const [loading, setLoading] = useState(false)
   const [showResult, setShowResult] = useState(false)
+  const searchRef = useRef<HTMLDivElement | null>(null)
+
+  const handleCloseResult = () => {
+    setShowResult(false)
+  }
+
+  useOutsideInteraction(searchRef, handleCloseResult)
 
   const handleSearch = async () => {
     if (search) {
@@ -46,7 +53,7 @@ export function Search() {
   }
 
   return (
-    <Container>
+    <Container ref={searchRef}>
       <SearchBox
         value={search}
         onChange={(e) => setSearch(e.target.value)}

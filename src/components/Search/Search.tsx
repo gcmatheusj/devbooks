@@ -12,6 +12,7 @@ import {
 import { api } from '../../services/api'
 import { Book, SearchResultBook } from '../SearchResultBook/SearchResultBook'
 import { SkeletonLoader } from '../SkeletonLoader'
+import { SearchLoader } from './SearchLoader'
 
 interface ResultState {
   items: Book[]
@@ -56,15 +57,13 @@ export function Search() {
         <SearchResult>
           <span>Resultado da Busca</span>
 
-          <SkeletonLoader width="200px" height="26px" />
-
           <SearchResultBookContainer>
             {result && !loading ? (
               result.items.map((item) => (
                 <SearchResultBook key={item.id} book={item} />
               ))
             ) : (
-              <span>Carregando...</span>
+              <SearchLoader />
             )}
           </SearchResultBookContainer>
 

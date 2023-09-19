@@ -75,7 +75,7 @@ export function Search() {
           </SearchResultBookContainer>
 
           <SeeAllContainer>
-            <Link to="/livros">Ver Todos</Link>
+            <Link to={`/livros?q=${search}`}>Ver Todos</Link>
           </SeeAllContainer>
         </SearchResult>
       )}

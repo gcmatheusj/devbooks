@@ -13,6 +13,7 @@ import { api } from '../../services/api'
 import { Book, SearchResultBook } from '../SearchResultBook/SearchResultBook'
 import { SearchLoader } from './SearchLoader'
 import { useOutsideInteraction } from '../../hooks/useOutsideInteraction'
+import { useLazyBooksQuery } from '../../hooks/useBooksQuery'
 
 interface ResultState {
   items: Book[]
@@ -20,10 +21,9 @@ interface ResultState {
 
 export function Search() {
   const [search, setSearch] = useState('')
-  const [result, setResult] = useState<ResultState | null>(null)
-  const [loading, setLoading] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const searchRef = useRef<HTMLDivElement | null>(null)
+  const { fetch, data, isLoading } = useLazyBooksQuery()
 
   const handleCloseResult = () => {
     setShowResult(false)
@@ -33,16 +33,14 @@ export function Search() {
 
   const handleSearch = async () => {
     if (search) {
-      setLoading(true)
       setShowResult(true)
 
       const maxResults = 3
-      const { data } = await api.get(
-        `/books?q=${search}&maxResults=${maxResults}`
-      )
 
-      setResult(data)
-      setLoading(false)
+      fetch({
+        search,
+        maxResults
+      })
     }
   }
 
@@ -65,8 +63,8 @@ export function Search() {
           <span>Resultado da Busca</span>
 
           <SearchResultBookContainer>
-            {result && !loading ? (
-              result.items.map((item) => (
+            {data && !isLoading ? (
+              data.items.map((item) => (
                 <SearchResultBook key={item.id} book={item} />
               ))
             ) : (

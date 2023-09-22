@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { api } from '../services/api'
+import { useState } from 'react'
 
 interface Book {
   id: string
@@ -41,4 +42,24 @@ export function useBooksQuery({ search, maxResults }: BooksQueryArgs) {
     queryFn: async () => await fetchBooks({ search, maxResults }),
     staleTime: Infinity
   })
+}
+
+export function useLazyBooksQuery() {
+  const [variables, setVariables] = useState<BooksQueryArgs | null>(null)
+
+  const query = useQuery({
+    queryKey: ['lazy-books', variables],
+    queryFn: async () => await fetchBooks(variables as BooksQueryArgs),
+    staleTime: Infinity,
+    enabled: Boolean(variables)
+  })
+
+  const fetch = (queryVariables: BooksQueryArgs) => {
+    setVariables(queryVariables)
+  }
+
+  return {
+    fetch,
+    ...query
+  }
 }

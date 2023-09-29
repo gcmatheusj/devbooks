@@ -23,11 +23,12 @@ import {
   Thumbnail,
   ThumbnailContainer
 } from './BookDetail.styles'
+import { BookDetailLoader } from './BookDetailLoader'
 
 export function BookDetail() {
   const params = useParams()
 
-  const { data } = useBookDetailsQuery({
+  const { data, isLoading } = useBookDetailsQuery({
     bookId: params.bookId as string
   })
 
@@ -42,57 +43,63 @@ export function BookDetail() {
 
   return (
     <MainLayout>
-      <Container>
-        <ContentContainer>
-          <h1>{data?.volumeInfo.title}</h1>
+      {data && !isLoading ? (
+        <Container>
+          <ContentContainer>
+            <h1>{data.volumeInfo.title}</h1>
 
-          <h2>{data?.volumeInfo.authors?.[0]}</h2>
+            <h2>{data.volumeInfo.authors?.[0]}</h2>
 
-          <PublisherContainer>
-            {data && (
-              <span>{formatDate(new Date(data.volumeInfo.publishedDate))}</span>
-            )}{' '}
-            · <span>{data?.volumeInfo.publisher}</span>
-          </PublisherContainer>
+            <PublisherContainer>
+              {data && (
+                <span>
+                  {formatDate(new Date(data.volumeInfo.publishedDate))}
+                </span>
+              )}{' '}
+              · <span>{data.volumeInfo.publisher}</span>
+            </PublisherContainer>
 
-          <DetailsContainer>
-            <DetailColumn>
-              <strong>
-                {data?.volumeInfo.averageRating
-                  ? data?.volumeInfo.averageRating
-                  : 4}
+            <DetailsContainer>
+              <DetailColumn>
+                <strong>
+                  {data.volumeInfo.averageRating
+                    ? data.volumeInfo.averageRating
+                    : 4}
 
-                <StarIcon />
-              </strong>
-              <span>Avaliações</span>
-            </DetailColumn>
+                  <StarIcon />
+                </strong>
+                <span>Avaliações</span>
+              </DetailColumn>
 
-            <DetailColumn>
-              <strong>{data?.volumeInfo.pageCount}</strong>
-              <span>Páginas</span>
-            </DetailColumn>
-          </DetailsContainer>
+              <DetailColumn>
+                <strong>{data.volumeInfo.pageCount}</strong>
+                <span>Páginas</span>
+              </DetailColumn>
+            </DetailsContainer>
 
-          <ButtonsContainer>
-            <Button variant="outlined">Estou Lendo</Button>
-            <Button variant="outlined">Quero Ler</Button>
-            <Button variant="outlined">Já Li</Button>
-          </ButtonsContainer>
+            <ButtonsContainer>
+              <Button variant="outlined">Estou Lendo</Button>
+              <Button variant="outlined">Quero Ler</Button>
+              <Button variant="outlined">Já Li</Button>
+            </ButtonsContainer>
 
-          <DescriptionContainer>
-            <h3>Sobre este livro</h3>
+            <DescriptionContainer>
+              <h3>Sobre este livro</h3>
 
-            <Description>
-              {reactHtmlParser(data?.volumeInfo.description as string)}
-            </Description>
-          </DescriptionContainer>
-        </ContentContainer>
+              <Description>
+                {reactHtmlParser(data.volumeInfo.description)}
+              </Description>
+            </DescriptionContainer>
+          </ContentContainer>
 
-        <ThumbnailContainer>
-          <Thumbnail src={thumbnailSrc} />
-          <BackgroundThumbnail src={thumbnailSrc} />
-        </ThumbnailContainer>
-      </Container>
+          <ThumbnailContainer>
+            <Thumbnail src={thumbnailSrc} />
+            <BackgroundThumbnail src={thumbnailSrc} />
+          </ThumbnailContainer>
+        </Container>
+      ) : (
+        <BookDetailLoader />
+      )}
     </MainLayout>
   )
 }

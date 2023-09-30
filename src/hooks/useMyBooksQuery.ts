@@ -8,7 +8,13 @@ interface MyBooks {
   wantsToRead: MyBook[]
 }
 
+function sleep() {
+  return new Promise((resolve) => setTimeout(resolve, 2000))
+}
+
 export async function fetchMyBooks(): Promise<MyBooks> {
+  await sleep()
+
   const { data } = await api.get<MyBooks>('/my-books')
 
   return data

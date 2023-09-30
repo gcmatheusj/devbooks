@@ -14,6 +14,7 @@ import {
   ReadingList,
   Thumbnail
 } from './MyBooks.styles'
+import { MyBooksLoader } from './MyBooksLoader'
 
 export function MyBooks() {
   const { data, isLoading } = useMyBooksQuery()
@@ -106,7 +107,7 @@ export function MyBooks() {
           </div>
         </Container>
       ) : (
-        <span>Carregando...</span>
+        <MyBooksLoader />
       )}
     </MainLayout>
   )

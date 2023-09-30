@@ -1,7 +1,19 @@
+import { Button } from '../../components/Button'
 import { useMyBooksQuery } from '../../hooks/useMyBooksQuery'
 import { MainLayout } from '../../layouts/MainLayout'
 import { generateThumbnailSrc } from '../../utils/generateThumbnailSrc'
-import { Book, BookContainer, Container } from './MyBooks.styles'
+import {
+  Book,
+  BookContainer,
+  Container,
+  Details,
+  PageCountText,
+  ProgressBar,
+  ProgressBarContainer,
+  ReadingCard,
+  ReadingList,
+  Thumbnail
+} from './MyBooks.styles'
 
 export function MyBooks() {
   const { data, isLoading } = useMyBooksQuery()
@@ -13,21 +25,44 @@ export function MyBooks() {
           <div>
             <h1>Lendo</h1>
 
-            <BookContainer>
+            <ReadingList>
               {data.isReading.map((item) => (
-                <Book key={item.bookId}>
-                  <img
-                    src={generateThumbnailSrc({ bookId: item.bookId })}
-                    alt={item.book.volumeInfo.title}
-                  />
+                <li key={item.bookId}>
+                  <ReadingCard>
+                    <Thumbnail
+                      src={generateThumbnailSrc({ bookId: item.bookId })}
+                      alt={item.book.volumeInfo.title}
+                    />
 
-                  <h2>{item.book.volumeInfo.title}</h2>
-                  {item.book.volumeInfo.authors && (
-                    <h3>{item.book.volumeInfo.authors[0]}</h3>
-                  )}
-                </Book>
+                    <Details>
+                      <h2>{item.book.volumeInfo.title}</h2>
+
+                      {item.book.volumeInfo.authors && (
+                        <h3>{item.book.volumeInfo.authors[0]}</h3>
+                      )}
+
+                      <ProgressBarContainer>
+                        <ProgressBar progress={30} />
+                        <span>30%</span>
+                      </ProgressBarContainer>
+
+                      <PageCountText>
+                        Faltam 200 pág. para terminar.
+                      </PageCountText>
+
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        size="small"
+                        fullWidth
+                      >
+                        Atualizar Leitura
+                      </Button>
+                    </Details>
+                  </ReadingCard>
+                </li>
               ))}
-            </BookContainer>
+            </ReadingList>
           </div>
 
           <div>
@@ -36,7 +71,7 @@ export function MyBooks() {
             <BookContainer>
               {data.wantsToRead.map((item) => (
                 <Book key={item.bookId}>
-                  <img
+                  <Thumbnail
                     src={generateThumbnailSrc({ bookId: item.bookId })}
                     alt={item.book.volumeInfo.title}
                   />
@@ -56,7 +91,7 @@ export function MyBooks() {
             <BookContainer>
               {data.read.map((item) => (
                 <Book key={item.bookId}>
-                  <img
+                  <Thumbnail
                     src={generateThumbnailSrc({ bookId: item.bookId })}
                     alt={item.book.volumeInfo.title}
                   />

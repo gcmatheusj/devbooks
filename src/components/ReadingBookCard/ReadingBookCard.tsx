@@ -14,6 +14,7 @@ import {
 } from './ReadingBookCard.styles'
 import { Input } from '../Input'
 import { useUpdateReadingMutation } from '../../hooks/useUpdateReadingMutation'
+import { Spinner } from '../Spinner'
 
 interface ReadingBookCardProps {
   myBook: MyBook
@@ -22,7 +23,7 @@ interface ReadingBookCardProps {
 export function ReadingBookCard({ myBook }: ReadingBookCardProps) {
   const [openUpdateReading, setOpenUpdateReading] = useState(false)
   const [page, setPage] = useState('')
-  const { mutateAsync } = useUpdateReadingMutation()
+  const { mutateAsync, isLoading } = useUpdateReadingMutation()
 
   const handleOpenUpdateReading = () => {
     setOpenUpdateReading(true)
@@ -105,7 +106,7 @@ export function ReadingBookCard({ myBook }: ReadingBookCardProps) {
                 Cancelar
               </Button>
               <Button size="small" fullWidth onClick={handleUpdateReading}>
-                Salvar
+                {isLoading ? <Spinner size={20} /> : 'Salvar'}
               </Button>
             </ButtonsContainer>
           </>

@@ -18,9 +18,8 @@ export function Header() {
           <Logo />
 
           <nav>
-            <Link to="/home">Home</Link>
+            <Link to="/home">Dashboard</Link>
             <Link to="/meus-livros">Meus Livros</Link>
-            <Link to="/favoritos">Favoritos</Link>
           </nav>
 
           <Search />

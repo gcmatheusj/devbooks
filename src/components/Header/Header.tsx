@@ -26,9 +26,11 @@ export function Header() {
           <Search />
         </NavContainer>
 
-        <Avatar>
-          <span>MC</span>
-        </Avatar>
+        <Link to="/perfil">
+          <Avatar>
+            <span>MC</span>
+          </Avatar>
+        </Link>
       </HeaderContainer>
     </Container>
   )

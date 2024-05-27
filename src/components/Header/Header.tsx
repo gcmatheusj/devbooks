@@ -2,13 +2,9 @@ import { Link } from 'react-router-dom'
 
 import { Logo } from '../Logo'
 import { Search } from '../Search'
+import { Avatar } from '../Avatar'
 
-import {
-  Avatar,
-  Container,
-  HeaderContainer,
-  NavContainer
-} from './Header.styles'
+import { Container, HeaderContainer, NavContainer } from './Header.styles'
 
 export function Header() {
   return (
@@ -25,9 +21,9 @@ export function Header() {
           <Search />
         </NavContainer>
 
-        <Avatar>
-          <span>MC</span>
-        </Avatar>
+        <Link to="/perfil">
+          <Avatar />
+        </Link>
       </HeaderContainer>
     </Container>
   )

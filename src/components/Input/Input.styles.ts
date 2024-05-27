@@ -22,9 +22,15 @@ export const Container = styled.div<ContainerProps>`
       border-color: ${error ? theme.colors.danger.main : theme.colors.gray};
       outline: none;
       transition: all 0.5s;
+      background-color: transparent;
 
       &:focus {
         border: 0.2rem solid ${theme.colors.primary};
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: #eee;
       }
     }
 

@@ -1,6 +1,6 @@
 import styled, { DefaultTheme, css } from 'styled-components'
 
-type ButtonColors = 'primary' | 'secondary'
+type ButtonColors = 'primary' | 'secondary' | 'danger'
 type ButtonSizes = 'small' | 'large'
 type ButtonVariants = 'default' | 'outlined'
 

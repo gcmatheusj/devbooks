@@ -60,6 +60,11 @@ export const Button = styled.button<ButtonProps>`
       filter: brightness(90%);
     }
 
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
     ${buttonVariant[variant](color, theme)}
     ${buttonSize[size](theme)}
     ${fullWidth && buttonFullWidth()}

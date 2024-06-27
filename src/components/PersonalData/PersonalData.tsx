@@ -7,13 +7,16 @@ import { Input } from '../Input'
 
 import { AvatarContainer, UpdateProfileContainer } from './PersonalData.styles'
 import { useUploadAvatarMutation } from '../../hooks/useUploadAvatarMutation'
+import { useDeleteAvatarMutation } from '../../hooks/useDeleteAvatarMutation'
 
 export function PersonalData() {
   const { user } = useAuth()
   const [name, setName] = useState(user?.name || '')
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const { mutateAsync: updateProfile, isLoading } = useUpdateProfileMutation()
   const { mutateAsync: uploadAvatar } = useUploadAvatarMutation()
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const { mutateAsync: deleteAvatar } = useDeleteAvatarMutation()
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -32,6 +35,10 @@ export function PersonalData() {
     await updateProfile({ name })
   }
 
+  const handleDeleteAvatar = async () => {
+    await deleteAvatar()
+  }
+
   return (
     <div>
       <AvatarContainer>
@@ -44,7 +51,9 @@ export function PersonalData() {
         />
         <Button onClick={handleFileUpload}>Alterar Foto</Button>
 
-        <Button variant="outlined">Remover Foto</Button>
+        <Button variant="outlined" onClick={handleDeleteAvatar}>
+          Remover Foto
+        </Button>
       </AvatarContainer>
 
       <UpdateProfileContainer>

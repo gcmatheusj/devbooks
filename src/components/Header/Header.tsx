@@ -6,7 +6,10 @@ import { Avatar } from '../Avatar'
 
 import { Container, HeaderContainer, NavContainer } from './Header.styles'
 
+import { useAuth } from '../../hooks/useAuth'
+
 export function Header() {
+  const { user } = useAuth()
   return (
     <Container>
       <HeaderContainer>
@@ -23,7 +26,7 @@ export function Header() {
         </NavContainer>
 
         <Link to="/perfil">
-          <Avatar />
+          <Avatar user={user} />
         </Link>
       </HeaderContainer>
     </Container>

@@ -1,22 +1,36 @@
 import styled, { css } from 'styled-components'
 
-import { AvatarProps } from './Avatar'
+interface AvatarContainerProps {
+  size: number
+  avatar?: string
+}
 
-export const Container = styled.div<AvatarProps>`
-  ${({ theme, size }) => css`
+export const Container = styled.div<AvatarContainerProps>`
+  ${({ theme, size, avatar }) => css`
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: ${theme.colors.primary};
     height: ${size}px;
     width: ${size}px;
     border-radius: ${theme.border.radius.small};
-    cursor: pointer;
     color: #fff;
 
-    span {
-      font-weight: ${theme.font.weight.normal};
+    svg {
+      height: ${size / 2}px;
+      width: ${size / 2}px;
     }
+
+    ${avatar &&
+    css`
+      background-image: url(${avatar});
+      background-size: cover;
+      background-position: center;
+    `}
+
+    ${!avatar &&
+    css`
+      background-color: ${theme.colors.primary};
+    `}
   `}
 `

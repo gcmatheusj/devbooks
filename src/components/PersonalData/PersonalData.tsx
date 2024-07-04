@@ -10,7 +10,7 @@ import { useUploadAvatarMutation } from '../../hooks/useUploadAvatarMutation'
 
 export function PersonalData() {
   const { user } = useAuth()
-  const [name, setName] = useState(user?.name || '')
+  const [name, setName] = useState('')
   const { mutateAsync: updateProfile, isLoading } = useUpdateProfileMutation()
   const { mutateAsync: uploadAvatar } = useUploadAvatarMutation()
   const fileInputRef = useRef<HTMLInputElement>(null)

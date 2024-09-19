@@ -3,7 +3,7 @@ import axios from 'axios'
 import { DEV_BOOKS_SESSION_KEY } from '../constants/storage'
 import { Session } from '../context/AuthContext/AuthContex'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = process.env.VITE_API_BASE_URL
 
 export const api = axios.create({
   baseURL: API_BASE_URL

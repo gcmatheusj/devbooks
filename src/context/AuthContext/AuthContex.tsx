@@ -69,7 +69,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }
 
   const signOut = async (): Promise<void> => {
-    console.log('logout')
+    localStorage.removeItem(DEV_BOOKS_SESSION_KEY)
+    setSession(null)
   }
 
   return (
